@@ -40,4 +40,10 @@ const accum = (string) => {
 		.map((word) => word[0].toUpperCase() + word.slice(1))
 		.join('-');
 };
-accum('abcd');
+// accum('abcd');
+
+// 4 Maskify
+const maskify = (str) => {
+	return str.slice(-4).padStart(str.length, '#');
+};
+// maskify('hello1234');
