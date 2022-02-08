@@ -64,3 +64,12 @@ const anagrams = (word1, words) => {
 		arrWords(word).every((char, i) => char === arrWords(word1)[i])
 	);
 };
+
+//find the parity outlier
+const findOutlier = (integers) => {
+	let myNum;
+	const evenNum = integers.filter((num) => num % 2 === 0);
+	const oddNum = integers.filter((num) => num % 2 !== 0);
+	evenNum.length === 1 ? ([myNum] = evenNum) : ([myNum] = oddNum);
+	return myNum;
+};
