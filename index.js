@@ -47,3 +47,20 @@ const maskify = (str) => {
 	return str.slice(-4).padStart(str.length, '#');
 };
 // maskify('hello1234');
+
+// 5 filter name with 4 chars
+const friend = (friends) => {
+	return friends.filter((friend) => friend.length === 4);
+};
+
+// 6 anagram
+
+const arrWords = (str) => {
+	if (!str.length) return false;
+	return [...str].map((char) => char.charCodeAt(0)).sort((a, b) => a - b);
+};
+const anagrams = (word1, words) => {
+	return words.filter((word) =>
+		arrWords(word).every((char, i) => char === arrWords(word1)[i])
+	);
+};
