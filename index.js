@@ -65,7 +65,7 @@ const anagrams = (word1, words) => {
 	);
 };
 
-//find the parity outlier
+// 7 find the parity outlier
 const findOutlier = (integers) => {
 	let myNum;
 	const evenNum = integers.filter((num) => num % 2 === 0);
@@ -73,3 +73,60 @@ const findOutlier = (integers) => {
 	evenNum.length === 1 ? ([myNum] = evenNum) : ([myNum] = oddNum);
 	return myNum;
 };
+
+// 8 Simple Pig Latin
+
+const pigIt = (str) => {
+	const splittedWords = str.split(' ');
+	const slicedWords = splittedWords.map((word) => word.slice(1));
+	return slicedWords
+		.map((word, i) => {
+			if (word === '' && splittedWords[i][0].charCodeAt(0) < 65)
+				return splittedWords[i][0];
+			return word + splittedWords[i][0] + 'ay';
+		})
+		.join(' ');
+};
+// pigIt('Pig latin is cool');
+pigIt('o tempora o mores !');
+
+//9 Who likes it?
+
+const likes = (names) => {
+	if (names.length === 0) return `no one likes this`;
+	if (names.length === 1) return `${names[0]} likes this`;
+	if (names.length === 2) return `${names[0]} and ${names[1]} like this`;
+	if (names.length === 3)
+		return `${names[0]}, ${names[1]} and  ${names[2]} like this`;
+
+	if (names.length > 3)
+		return `${names[0]}, ${names[1]} and ${names.length - 2}  others like this`;
+};
+
+//10Persistent Bugger
+const mutiplyResult = (num) => {
+	const numArr = num
+		.toString()
+		.split('')
+		.map((num) => Number(num));
+	const multiply = numArr.reduce((acc, num) => acc * num, 1);
+	return multiply;
+};
+
+const persistence = (num) => {
+	let count = 0;
+	const length = num.toString().length;
+	if (length === 1) return count;
+	while (num.toString().length > 1) {
+		++count;
+		num = mutiplyResult(num);
+	}
+	return count;
+};
+
+persistence(39);
+
+// function hello() {
+// 	console.log(arguments);
+// }
+// hello(1, 2, 3, 'hello', false);
