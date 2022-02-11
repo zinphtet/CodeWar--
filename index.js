@@ -130,3 +130,127 @@ persistence(39);
 // 	console.log(arguments);
 // }
 // hello(1, 2, 3, 'hello', false);
+
+// 11 Calculating with Functions
+
+const toFixed = (str) => {
+	const result = eval(str);
+	const split = result.toString().split('.');
+	return Number(split[0]);
+};
+
+const zero = (val) => {
+	if (!val) return 0;
+	return toFixed(`0${val}`);
+};
+const one = (val) => {
+	if (!val) return 1;
+	return toFixed(`1${val}`);
+};
+const two = (val) => {
+	if (!val) return 2;
+	return toFixed(`2${val}`);
+};
+const three = (val) => {
+	if (!val) return 3;
+	return toFixed(`3${val}`);
+};
+const four = (val) => {
+	if (!val) return 4;
+	return toFixed(`4${val}`);
+};
+const five = (val) => {
+	if (!val) return 5;
+	return toFixed(`5${val}`);
+};
+const six = (val) => {
+	if (!val) return 6;
+	return toFixed(`6${val}`);
+};
+const seven = (val) => {
+	if (!val) return 7;
+	return toFixed(`7${val}`);
+};
+const eight = (val) => {
+	if (!val) return 8;
+	return toFixed(`8${val}`);
+};
+const nine = (val) => {
+	if (!val) return 9;
+	return toFixed(`9${val}`);
+};
+
+const plus = (val) => '+' + val;
+const minus = (val) => '-' + val;
+const times = (val) => '*' + val;
+const dividedBy = (val) => '/' + val;
+
+//12Valid Parentheses
+
+const validParentheses = (parens) => {
+	const split = parens.split('');
+	let count1 = 0;
+	let count2 = 0;
+	if (split.length == 1) return false;
+	split.forEach((par) => {
+		if (par === '(') ++count1;
+		if (par === ')') {
+			--count1;
+			if (count1 < 0) count2 = -1;
+		}
+	});
+
+	if (count2 < 0 || count1 > 0) return false;
+	return true;
+};
+
+//13 Chain Adding
+
+const add = (val1) => {
+	const fn = (val2) => {
+		if (!val2) return val1;
+		return val1 + val2;
+	};
+	return fn();
+};
+
+//14 String Increment
+
+const incrementString = (str) => {
+	const splitted = str.split('');
+	const charArr = [];
+	const numArr = [];
+	splitted.forEach((char) => {
+		char.charCodeAt(0) >= 48 && char.charCodeAt(0) <= 57
+			? numArr.push(char)
+			: charArr.push(char);
+	});
+	if (numArr.length === 0) return charArr.join('') + 1;
+	let num = Number(numArr.join('')) + 1;
+	let numStr = num.toString().padStart(numArr.length, '0');
+	return charArr.join('') + numStr;
+};
+
+//15 The Hashtag Generator
+
+const generateHashtag = (str) => {
+	if (!str.trim()) return false;
+	const resultStr = str
+		.trim()
+		.split(' ')
+		.filter((word) => word !== '')
+		.map((word) => word[0].toUpperCase() + word.slice(1))
+		.join('');
+	if (resultStr.length >= 140) return false;
+	return '#' + resultStr;
+};
+
+//16  sumStrings
+
+const sumStrings = (a, b) => {
+	let num1 = parseInt(a);
+	let num2 = parseInt(b);
+	if (!num1) num1 = 0;
+	if (!num2) num2 = 0;
+	return (BigInt(num1) + BigInt(num2)).toString();
+};
