@@ -254,3 +254,42 @@ const sumStrings = (a, b) => {
 	if (!num2) num2 = 0;
 	return (BigInt(num1) + BigInt(num2)).toString();
 };
+
+//17 Pete , the baker
+
+const cakes = (recipe, available) => {
+	const keys = Object.keys(recipe);
+	const resultArr = keys.map((item) => {
+		if (!available[item]) return 0;
+		return available[item] / recipe[item];
+	});
+	const min = Math.min(...resultArr)
+		.toString()
+		.split('.')[0];
+	return Number(min);
+};
+// cakes(
+// 	{ flour: 500, sugar: 200, eggs: 1 },
+// 	{ flour: 1200, sugar: 1200, eggs: 5, milk: 200 }
+// );
+
+//Scramblies
+
+const scramble = (str1, str2) => {
+	const sortedStr1 = str1.split('').sort();
+	const sortedStr2 = str2.split('').sort();
+	const resultArr = sortedStr2.map((char) => sortedStr1.includes(char));
+	return resultArr.every((ele) => ele === true);
+};
+
+//Convert A Hex String To RGB
+
+const hexStringToRGB = (hexString) => {
+	const split = hexString.slice(1).match(/(..?)/g);
+	console.log(split);
+	return {
+		r: parseInt(split[0], 16),
+		g: parseInt(split[1], 16),
+		b: parseInt(split[2], 16),
+	};
+};
