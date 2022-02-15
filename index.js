@@ -293,3 +293,195 @@ const hexStringToRGB = (hexString) => {
 		b: parseInt(split[2], 16),
 	};
 };
+
+//Move zero to the end
+
+const findLengthArr1 = (arr) => {
+	let length = 0;
+	while (arr[length] !== undefined) {
+		length++;
+	}
+	return length;
+};
+
+const removeZeros1 = (array) => {
+	const arr = [...array];
+	let length = findLengthArr1(arr);
+	let zeroTimes = 0;
+	for (let i = 0; i < length - 1; i++) {
+		if (arr[i] == 0) {
+			zeroTimes++;
+			for (let j = i; j < length - 1; j++) {
+				arr[j] = arr[j + 1];
+			}
+			i--;
+		}
+	}
+	for (let i = length - zeroTimes; i < length; i++) {
+		arr[i] = 0;
+	}
+	return arr;
+};
+
+/////////////////////////////////////////////////////////////////////
+
+const findLengthArr = (arr) => {
+	let length = 0;
+	while (arr[length] !== undefined) {
+		length++;
+	}
+	return length;
+};
+
+const removeZeros = (array) => {
+	const arr = [...array];
+	const length = findLengthArr(arr);
+	let loopTime = 0;
+	for (let i = 0; i < length; i++) {
+		if (arr[i] == 0) {
+			loopTime++;
+		}
+	}
+
+	for (let i = 0; i < length - 1; i++) {
+		if (arr[i] == 0) {
+			if (arr[i + 1] != 0) {
+				let temp = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temp;
+			} else {
+				for (let j = i; j < length - 1; j++) {
+					arr[j] = arr[j + 1];
+				}
+				i--;
+			}
+		}
+	}
+	for (let i = length - loopTime; i < length; i++) {
+		arr[i] = 0;
+	}
+	return arr;
+};
+
+// removeZeros([1, 2, 0, 4, 5, 0, 0, 8]); //1 2 4 5 0 0 8 0
+// removeZeros([1, 0, 0, 0, 0, 9, 8]);
+
+//firstNonRepeatingLetter
+
+const firstNonRepeatingLetter = (str) => {
+	if (str.length == 1) return str;
+	const split = str.split('');
+	const resultArr = [];
+	split.forEach((char) => {
+		const arr = split.filter((fchar) =>
+			char.toLowerCase() === fchar.toLowerCase() ? char : ''
+		);
+		if (arr.length === 1) {
+			resultArr.push(arr[0]);
+		}
+	});
+	return resultArr[0] ? resultArr[0] : '';
+};
+// firstNonRepeatingLetter('moonmen');
+
+//moonmen
+// const hello = [1, 2, 3];
+// hello = [3, 4, 5];
+
+//Caesar Cipher Helper
+
+class CaesarCipher {
+	constructor(num) {
+		this.num = num;
+	}
+	encode(str) {
+		if (isFinite(str)) return str;
+		const split = str.split('').map((char) => char.charCodeAt(0));
+		const numArr = split.map((arrNum) => {
+			let finalValue;
+			if (arrNum <= 90) {
+				finalValue = arrNum + this.num;
+				if (finalValue > 90) {
+					finalValue = 64 + (arrNum + this.num - 90);
+				}
+			}
+			if (arrNum <= 122) {
+				finalValue = arrNum + this.num;
+				if (finalValue > 122) {
+					finalValue = 96 + (arrNum + this.num - 122);
+				}
+			}
+			return finalValue;
+		});
+		return String.fromCharCode(...numArr).toUpperCase();
+	}
+	decode(str) {
+		if (isFinite(str)) return str;
+		const split = str.split('').map((char) => char.charCodeAt(0));
+		const numArr = split.map((arrNum) => {
+			let finalValue = arrNum - this.num;
+			if (arrNum <= 90) {
+				if (finalValue < 65) {
+					finalValue = 90 - (64 - finalValue);
+				}
+			}
+			if (arrNum >= 97) {
+				if (finalValue < 97) {
+					finalValue = 122 - (96 - finalValue);
+				}
+			}
+			return finalValue;
+		});
+		return String.fromCharCode(...numArr).toUpperCase();
+	}
+}
+
+const c = new CaesarCipher(5);
+
+function CaesarCipher1(shitNum) {
+	this.num = shitNum;
+}
+CaesarCipher1.prototype.encode = function (str) {
+	if (isFinite(str)) return str;
+	const split = str.split('').map((char) => char.charCodeAt(0));
+
+	const numArr = split.map((arrNum) => {
+		let finalValue;
+		if (arrNum <= 90) {
+			finalValue = arrNum + this.num;
+			if (finalValue > 90) {
+				finalValue = 64 + (arrNum + this.num - 90);
+			}
+		}
+		if (arrNum <= 122) {
+			finalValue = arrNum + this.num;
+			if (finalValue > 122) {
+				finalValue = 96 + (arrNum + this.num - 122);
+			}
+		}
+		return finalValue;
+	});
+	return String.fromCharCode(...numArr).toUpperCase();
+};
+CaesarCipher1.prototype.decode = function (str) {
+	if (isFinite(str)) return str;
+	const split = str.split('').map((char) => char.charCodeAt(0));
+
+	const numArr = split.map((arrNum) => {
+		let finalValue = arrNum - this.num;
+		if (arrNum <= 90) {
+			if (finalValue < 65) {
+				finalValue = 90 - (64 - finalValue);
+			}
+		}
+		if (arrNum >= 97) {
+			if (finalValue < 97) {
+				finalValue = 122 - (96 - finalValue);
+			}
+		}
+		return finalValue;
+	});
+	return String.fromCharCode(...numArr).toUpperCase();
+};
+
+const a = new CaesarCipher1(5);
