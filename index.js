@@ -485,3 +485,17 @@ CaesarCipher1.prototype.decode = function (str) {
 };
 
 const a = new CaesarCipher1(5);
+
+/// humanReadable Time
+
+const humanReadable = (input) => {
+	const sec = input < 60 ? input : input % 60;
+	const min = Number(((input % 3600) / 60).toString().split('.')[0]);
+	const hour = Number((input / 3600).toString().split('.')[0]);
+	return `${hour.toString().padStart(2, 0)}:${min
+		.toString()
+		.padStart(2, 0)}:${sec.toString().padStart(2, 0)}`;
+};
+
+humanReadable(90);
+humanReadable(45296);
