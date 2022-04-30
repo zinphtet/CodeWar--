@@ -497,5 +497,145 @@ const humanReadable = (input) => {
 		.padStart(2, 0)}:${sec.toString().padStart(2, 0)}`;
 };
 
-humanReadable(90);
-humanReadable(45296);
+// humanReadable(90);
+// humanReadable(45296);
+
+//JS Closure
+//memory efficient
+
+const heavyDuty = (indx) => {
+	const num = [];
+	for (let i = 0; i < 60000000; i++) {
+		num.push(i);
+	}
+	const arr = new Array(10000).fill(0);
+	console.log('heavy Duty');
+	return arr[indx];
+};
+
+// heavyDuty(234);
+// heavyDuty(343);
+// heavyDuty(756);
+//memory efffiecnt
+const heavyDuty2 = () => {
+	const num = [];
+	for (let i = 0; i < 60000000; i++) {
+		num.push(i);
+	}
+	const arr = new Array(10000).fill(0);
+
+	return function (indx) {
+		console.log('get Duty ');
+		return arr[indx];
+	};
+};
+
+const getDuty = heavyDuty2();
+
+// getDuty(123);
+// getDuty(900);
+// getDuty(5345);
+
+//Closure Encapsulation
+
+const CallOnce = () => {
+	let call = 0;
+	return function () {
+		if (call > 0) return;
+		console.log('How many times you called I run once');
+		call++;
+	};
+};
+
+const call = CallOnce();
+// call();
+// call();
+
+// lastYear Prototype method
+Date.prototype.lastYear = function () {
+	return this.getFullYear() - 1;
+};
+// console.log(new Date().lastYear());
+
+//Overwrite the existing method
+Array.prototype.map = function () {
+	const arr = [];
+	for (let i = 0; i < this.length; i++) {
+		arr.push(this[i] + '🍩');
+	}
+	return [...arr];
+};
+
+//Amazon Shopping Cart
+const user = {
+	name: 'Mg Mg',
+	active: true,
+	cart: [],
+	purchase: [],
+};
+
+//addToCart
+const addToCart = (userObj, item) => {
+	userObj.cart.push(item);
+};
+addToCart(user, { name: 'iPhone 14', price: 1220 });
+addToCart(user, { name: 'MacBook pro', price: 2000 });
+//addPercent
+const addThreePercent = (userObj) => {
+	userObj.cart.forEach((item) => {
+		item.percent = item.price * 0.03;
+	});
+};
+addThreePercent(user);
+
+//buyItems
+const buyItems = (userObj) => {
+	userObj.purchase = [...userObj.cart];
+};
+buyItems(user);
+
+//emptyCart
+const emptyCart = (userObj) => {
+	userObj.cart = [];
+};
+
+emptyCart(user);
+
+//Refund
+const refundItem = (userObj, reItem) => {
+	userObj.purchase = userObj.purchase.filter(
+		(item) => item.name !== reItem.name
+	);
+};
+
+refundItem(user, { name: 'iPhone 14' });
+
+//Closure
+
+const closure = () => {
+	let count = 3000;
+	return () => count;
+};
+
+const getCount = closure();
+// console.log(getCount());
+
+//Partial Application   //Not Closure
+const MultiPly = (a, b, c) => a * b * c;
+const multiBy5 = MultiPly.bind(null, 5);
+// multiBy5(4, 3);
+
+//Compose and pipe
+//Compose
+// * make the number absoulte and multiply by 7
+const compose = (f, g, h) => (data) => f(g(h(data)));
+const multiply = (data) => data * 7;
+const double = (data) => data * 2;
+const numberAbsolute = (data) => Math.abs(data);
+const makeNumberAbsoluteAndMultiplyBy7 = compose(
+	multiply,
+	numberAbsolute,
+	double
+);
+const data = makeNumberAbsoluteAndMultiplyBy7(-40);
+console.log(data);
