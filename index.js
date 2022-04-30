@@ -558,13 +558,13 @@ Date.prototype.lastYear = function () {
 // console.log(new Date().lastYear());
 
 //Overwrite the existing method
-Array.prototype.map = function () {
-	const arr = [];
-	for (let i = 0; i < this.length; i++) {
-		arr.push(this[i] + '🍩');
-	}
-	return [...arr];
-};
+// Array.prototype.map = function () {
+// 	const arr = [];
+// 	for (let i = 0; i < this.length; i++) {
+// 		arr.push(this[i] + '🍩');
+// 	}
+// 	return [...arr];
+// };
 
 //Amazon Shopping Cart
 const user = {
@@ -638,4 +638,60 @@ const makeNumberAbsoluteAndMultiplyBy7 = compose(
 	double
 );
 const data = makeNumberAbsoluteAndMultiplyBy7(-40);
-console.log(data);
+// console.log(data);
+
+//Amazon Shoping Cart funtional
+const User = {
+	name: 'David',
+	cart: [],
+	purchases: [],
+};
+const userHistory = [];
+//AddItem
+const AddItem = (user, item) => {
+	userHistory.push(user);
+	return {
+		...user,
+		cart: [...user.cart, item],
+	};
+};
+
+//Add Percentage  13 p
+const Add10Percent = (user) => {
+	userHistory.push(user);
+	const updatedCart = user.cart.map((item) => ({
+		name: item.name,
+		price: item.price * 0.1 + item.price,
+	}));
+	return {
+		...user,
+		cart: [...updatedCart],
+	};
+};
+
+//Buy Item
+
+const BuyItem = (user) => {
+	userHistory.push(user);
+	return {
+		...user,
+		purchases: [...user.cart],
+	};
+};
+
+//Empty Cart
+
+const EmptyCart = (user) => {
+	userHistory.push(user);
+	return {
+		...user,
+		cart: [],
+	};
+};
+
+const composes =
+	(f, g) =>
+	(...args) =>
+		f(g(...args));
+
+const purchaseItem = (...fns) => fns.reduce(composes);
